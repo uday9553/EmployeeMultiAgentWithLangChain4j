@@ -1,0 +1,39 @@
+
+spring:
+  application:
+    name: langchain4j-demo
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:ordersdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    defer-datasource-initialization: true
+
+server.port: 9292
+
+langchain4j:
+  ollama:
+    chat-model:
+      base-url: http://localhost:11434
+      model-name: llama3.2:1b
+#      log-requests: true
+#      log-responses: true
+      timeout: PT120S
+
+
