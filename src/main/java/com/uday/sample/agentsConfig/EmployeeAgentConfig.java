@@ -13,13 +13,13 @@ public class EmployeeAgentConfig {
     @Bean
     public EmployeeAgent employeeAgent(ChatModel chatModel, EmployeeTool employeeTool) {
         return AgenticServices.agentBuilder(EmployeeAgent.class)
-                .chatModel(chatModel).tools(employeeTool).outputKey("employeeDetails").build();
+                .chatModel(chatModel).tools(employeeTool).maxToolCallingRoundTrips(3).outputKey("employeeDetails").build();
     }
 
     @Bean
     public PromotionAgent promotionAgent(ChatModel chatModel, PromotionTool promotionTool) {
         return AgenticServices.agentBuilder(PromotionAgent.class)
-                .chatModel(chatModel).tools(promotionTool).outputKey("promotionDecision").build();
+                .chatModel(chatModel).tools(promotionTool).maxToolCallingRoundTrips(3).outputKey("promotionDecision").build();
     }
 
     @Bean

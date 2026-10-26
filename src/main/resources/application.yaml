@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: langchain4j-demo
@@ -31,9 +30,35 @@ langchain4j:
   ollama:
     chat-model:
       base-url: http://localhost:11434
-      model-name: llama3.2:1b
-#      log-requests: true
-#      log-responses: true
-      timeout: PT120S
+      model-name: ${OLLAMA_MODEL:llama3.2:1b}
+      supported-capabilities:
+        - RESPONSE_FORMAT_JSON_SCHEMA
+      temperature: 0
+      # Bound planner generation on CPU and avoid retrying a slow request behind the stream.
+      num-predict: 768
+      max-retries: 0
+      #      log-requests: true
+      #      log-responses: true
+      timeout: PT180S
+
+employee:
+  chat:
+    # Leave time to send the result or error after the model's timeout.
+    stream-timeout: PT210S
+
+---
+# Optional persistent local database configuration, kept in this same file.
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:h2:file:./local-data/employees;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+  jpa:
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      mode: never
 
 

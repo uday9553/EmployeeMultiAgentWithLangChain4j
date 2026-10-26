@@ -37,3 +37,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+# Angular build and local caches
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.npm-cache/
+local-data/

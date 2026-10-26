@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:employee-ai:response:v1",
+  "title": "Employee AI response, version 1",
+  "type": "object",
+  "required": [
+    "conversationId",
+    "message",
+    "status",
+    "agents",
+    "results",
+    "schemaVersion",
+    "ui"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "conversationId": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "message": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SUCCESS",
+        "FOLLOW_UP",
+        "FAILED"
+      ]
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6
+    },
+    "results": {
+      "type": "array",
+      "maxItems": 6
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "ui": {
+      "$ref": "#/$defs/node"
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "props",
+        "children"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "column",
+            "row",
+            "heading",
+            "text",
+            "employee-card",
+            "promotion-card",
+            "employee-table",
+            "chart",
+            "form",
+            "button",
+            "status",
+            "error",
+            "card",
+            "confirmation"
+          ]
+        },
+        "props": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "data": {}
+          }
+        },
+        "children": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        }
+      }
+    }
+  },
+  "$comment": "UiPlanner additionally enforces maximum nesting depth 8, total nodes 100 and serialized tree length 100000 characters. Props are constructed solely from verified Java data, never parsed from model-generated UI. Action forms use props.data.actionId; the server resolves its allowed operation and employee binding."
+}

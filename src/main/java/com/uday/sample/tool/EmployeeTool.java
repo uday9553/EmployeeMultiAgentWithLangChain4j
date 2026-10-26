@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 public class EmployeeTool {
     private final EmployeeService service;
 
-    public EmployeeTool(EmployeeService service) { this.service = service; }
+    public EmployeeTool(EmployeeService service) {
+        this.service = service;
+    }
 
     @Tool("Fetch employee details using the full employee ID such as EMP-1001, not the numeric database ID")
     public Employee getEmployee(String employeeId) {

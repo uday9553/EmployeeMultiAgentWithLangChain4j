@@ -6,6 +6,7 @@ import com.uday.sample.repository.PromotionPolicyRepository;
 import com.uday.sample.service.EmployeeService;
 import com.uday.sample.service.PromotionService;
 import org.junit.jupiter.api.Test;
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
